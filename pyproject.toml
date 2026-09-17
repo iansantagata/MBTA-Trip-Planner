@@ -16,3 +16,6 @@ dependencies = [
     "click==8.5.0",
     "requests==2.34.2",
 ]
+
+[project.scripts]
+mbta = "mbta:main"
