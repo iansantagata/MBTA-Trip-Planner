@@ -28,6 +28,7 @@ Please document your decision and your reasons for it.
 - Deduplicate and sort output shown to user in the presentation layer
 - Avoid sorting intermediate data which is extra work
 - Separate interacting with the API from interacting with the CLI to keep responsibilities separate
+- Added basic tests with mocking of the API request so that tests do not trigger API requests
 
 ## Solution
 
