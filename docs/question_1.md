@@ -24,18 +24,22 @@ Please document your decision and your reasons for it.
 - Utilize filters on the HTTP request to reduce the size of HTTP responses with minimally required data set
 - Allow the solution to extend to all supported types of routes as requested by the user to be more generalizable
     - Includes light rail, heavy rail, commuter rail, bus, and ferry route types
-- Prefer re-requesting data to be aware of latest data set rather than downloading and storing a local copy and operating off of stale data
+- Prefer re-requesting to use latest data set rather than downloading and storing a local copy that can become stale
 - Deduplicate and sort output shown to user in the presentation layer
-- Avoid sorting intermediate data as extra work
+- Avoid sorting intermediate data which is extra work
+- Separate interacting with the API from interacting with the CLI to keep responsibilities separate
 
 ## Solution
 
-At the top level of this repository, run one of the following commands in a shell after setting up the repository locally (see [README.md]):
+At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md]):
 
 ```bash
-# Short flag version
-mbta -hl
+# Help command for CLI
+routes --help
 
-# Long flag version
-mbta --include-heavy-rail --include-light-rail
+# Short flag version of solution
+routes -hl
+
+# Long flag version of solution
+routes --heavy-rail --light-rail
 ```
