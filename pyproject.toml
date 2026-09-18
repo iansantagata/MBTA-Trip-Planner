@@ -3,7 +3,7 @@ requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mbta-wrapper"
+name = "mbta_wrapper"
 description = "A wrapper around MBTA APIs that allows for some additional functionality"
 authors = [
     {name = "Ian Santagata", email = "7070901+iansantagata@users.noreply.github.com"}
@@ -13,9 +13,17 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 dependencies = [
+    "black==26.5.1",
     "click==8.5.0",
+    "isort==9.0.1",
+    "mypy==2.3.1",
+    "pylint==4.0.8",
+    "pytest==9.1.1",
     "requests==2.34.2",
 ]
 
 [project.scripts]
-routes = "main:routes"
+routes = "cli:routes"
+
+[tool.pylint]
+main.ignore = [ "CVS", ".venv", "tests" ]

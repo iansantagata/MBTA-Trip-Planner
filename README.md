@@ -31,3 +31,23 @@ deactivate
 # Delete the virtual environment named ".venv"
 rm -rf .venv/
 ```
+
+## Development
+
+To format, lint, and type check code in this repository, run any of the following commands at repository root:
+
+```bash
+# Sort imports
+isort .
+
+# Format code
+black .
+
+# Lint code
+pylint .
+
+# Static type check
+mypy .
+```
+
+To test code in this repository, run `pytest` at repository root.

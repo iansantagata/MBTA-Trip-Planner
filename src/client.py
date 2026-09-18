@@ -4,11 +4,12 @@ A light-weight client to interact with the MBTA's API
 Reference - https://api-v3.mbta.com/docs/swagger/index.html
 """
 
-from enums import RouteType
 import requests
 
+from enums import RouteType
 
 _API_BASE_URL = "https://api-v3.mbta.com"
+_TIMEOUT_IN_SECONDS = 5
 
 # Endpoints
 _ROUTES_ENDPOINT = "/routes"
@@ -16,7 +17,8 @@ _ROUTES_ENDPOINT = "/routes"
 
 def get_route_long_names(route_types: list[RouteType]) -> list[str]:
     """
-    Get an ordered and deduplicated list of all route long names of the provided route types from the MBTA API
+    Get an ordered and deduplicated list of all route long names of the
+    provided route types from the MBTA API.
     """
     # Short circuit in case of falsy inputs (e.g. None or empty list)
     if not route_types:
@@ -32,11 +34,13 @@ def get_route_long_names(route_types: list[RouteType]) -> list[str]:
 
     # Make the request to the MBTA API
     try:
-        response = requests.get(url, params=parameters)
+        response = requests.get(url, params=parameters, timeout=_TIMEOUT_IN_SECONDS)
         response.raise_for_status()
         response_body = response.json()
     except Exception as ex:
-        raise RuntimeError(f"Failed to retrieve data from MBTA API request to URL: {url}") from ex
+        raise RuntimeError(
+            f"Failed to retrieve data from MBTA API request to URL: {url}"
+        ) from ex
 
     # Process the response and use a set to deduplicate route names
     route_long_names: set[str] = set()
