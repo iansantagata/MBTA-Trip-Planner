@@ -55,6 +55,18 @@ _ferry_option = click.option(
 )
 
 
+# Helper methods
+def _validate_route_types(route_types: list[RouteType]) -> None:
+    """
+    Validates that at least one route type is included to be queried
+    """
+
+    if not route_types:
+        raise click.UsageError(
+            "At least one route type option must be included in the search"
+        )
+
+
 @click.command()
 @_light_rail_option
 @_heavy_rail_option
@@ -76,6 +88,7 @@ def routes(
     At least one route type flag is required.
     """
 
+    # Validate inputs
     route_types: list[RouteType] = []
     if light_rail:
         route_types.append(RouteType.LIGHT_RAIL)
@@ -128,6 +141,7 @@ def stops(
     At least one route type flag is required.
     """
 
+    # Validate inputs
     route_types: list[RouteType] = []
     if light_rail:
         route_types.append(RouteType.LIGHT_RAIL)
@@ -173,12 +187,82 @@ def stops(
     click.echo()
 
 
-def _validate_route_types(route_types: list[RouteType]) -> None:
+@click.command()
+@_light_rail_option
+@_heavy_rail_option
+@_commuter_rail_option
+@_bus_option
+@_ferry_option
+def connections(
+    light_rail: bool,
+    heavy_rail: bool,
+    commuter_rail: bool,
+    bus: bool,
+    ferry: bool,
+) -> None:
     """
-    Validates that at least one route type is included to be queried
+    Get a table of stops that serve as connections between multiple routes.
+
+    Table is ordered alphabetically by stop name with corresponding routes also
+    order alphabetically.
+
+    At least one route type flag is required.
     """
 
-    if not route_types:
-        raise click.UsageError(
-            "At least one route type option must be included in the search"
-        )
+    # Validate inputs
+    route_types: list[RouteType] = []
+    if light_rail:
+        route_types.append(RouteType.LIGHT_RAIL)
+
+    if heavy_rail:
+        route_types.append(RouteType.HEAVY_RAIL)
+
+    if commuter_rail:
+        route_types.append(RouteType.COMMUTER_RAIL)
+
+    if bus:
+        route_types.append(RouteType.BUS)
+
+    if ferry:
+        route_types.append(RouteType.FERRY)
+
+    _validate_route_types(route_types)
+
+    # Retrieve the data
+    route_names_by_id = get_route_ids_to_long_names(route_types)
+    route_ids = list(route_names_by_id.keys())
+    route_ids_by_stop: dict[str, list[str]] = {}
+
+    for route_id in route_ids:
+        stops_on_route = get_stops_on_route(route_id)
+        for stop_name in stops_on_route:
+            if not route_ids_by_stop.get(stop_name):
+                route_ids_by_stop[stop_name] = []
+
+            route_ids_by_stop[stop_name] += [route_id]
+
+    # Filter and sort the data
+    connecting_stops_to_route_ids = {
+        stop_name: sorted(route_ids)
+        for stop_name, route_ids in route_ids_by_stop.items()
+        if len(route_ids) > 1
+    }
+    connecting_stops_to_route_ids = dict(sorted(connecting_stops_to_route_ids.items()))
+
+    # Format the output into a table
+    table_data: dict[str, list] = {
+        "Stops": [],
+        "Routes": [],
+    }
+    for stop_name, route_ids in connecting_stops_to_route_ids.items():
+        table_data["Stops"] += [stop_name]
+
+        route_names = []
+        for route_id in route_ids:
+            route_names += [route_names_by_id[route_id]]
+
+        table_data["Routes"] += [", ".join(route_names)]
+
+    click.echo()
+    click.echo(tabulate(table_data, headers="keys"))
+    click.echo()

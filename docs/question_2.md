@@ -19,19 +19,22 @@ Extend your pgoram so it displays additional information:
 - Opt to interpret route ID not found by API request as 0 stops for user transparency purposes
     - This would only occur if a route ID is provided but unrecognized, leading to an HTTP 200 Success with no stop data
     - Functionally, this is only possible in testing scenarios, or when a route ID is manually provided (which is not currently supported)
-- Separate commands for listing routes with stop count from listing stops that connect multiple routes since they have different use cases
+- Separate commands for enumerating routes with stop counts from enumerating connecting stops since they have different use cases
 
 ## Solution
 
 At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md]):
 
 ```bash
-# Help command for CLI
+# Help commands for CLI
 stops --help
+connections --help
 
-# Short flag version of stop count solution
+# Short flag version of solutions
 stops -lh
+connections -lh
 
-# Long flag version of stop count solution
+# Long flag version of solutions
 stops --light-rail --heavy-rail
+connections --light-rail --heavy-rail
 ```
