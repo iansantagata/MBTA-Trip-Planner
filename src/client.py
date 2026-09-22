@@ -60,21 +60,22 @@ def get_route_ids_to_long_names(route_types: list[RouteType]) -> dict[str, str]:
     return route_names_by_id
 
 
-def get_num_stops_on_route(route_id: str) -> int:
+def get_stops_on_route(route_id: str) -> list[str]:
     """
-    Get the number of stops along a given route from the MBTA API.
+    Get the stop names along a given route from the MBTA API.
 
-    If the route ID is invalid, returns 0 stops.
+    If the route ID is invalid, returns empty string.
     """
 
     # Short circuit in case of falsy inputs (e.g. None or empty string)
     if not route_id:
-        return 0
+        return []
 
     url = _API_BASE_URL + _STOPS_ENDPOINT
     parameters = {
-        "fields[stop]": "",  # Restrict output to only the relevant fields (i.e. None)
+        "fields[stop]": "name",  # Restrict output to only the relevant fields
         "filter[route]": route_id,
+        "sort": "name",
     }
 
     # Make the request to the MBTA API
@@ -87,12 +88,15 @@ def get_num_stops_on_route(route_id: str) -> int:
             f"Failed to retrieve data from MBTA API request to URL: {url}"
         ) from ex
 
-    # Process the response and use a set to deduplicate stop IDs
-    stops_on_route: set[str] = set()
+    # Process the response and deduplicate stop IDs using dictionary keys
+    stops_on_route: dict[str, str] = {}
     stops: list[dict] = response_body.get("data", [])
     for stop in stops:
         stop_id = stop.get("id", None)
-        if stop_id:
-            stops_on_route.add(stop_id)
+        stop_attributes = stop.get("attributes", {})
+        stop_name = stop_attributes.get("name", None)
+        if stop_id and stop_name:
+            stops_on_route[stop_id] = stop_name
 
-    return len(stops_on_route)
+    stop_names = list(stops_on_route.values())
+    return stop_names

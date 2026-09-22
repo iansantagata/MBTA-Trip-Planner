@@ -5,7 +5,7 @@ The CLI entry point for this MBTA wrapper app
 import click
 from tabulate import tabulate
 
-from client import get_num_stops_on_route, get_route_ids_to_long_names
+from client import get_route_ids_to_long_names, get_stops_on_route
 from enums import RouteType
 
 # Common CLI Options
@@ -151,8 +151,8 @@ def stops(
     route_ids = route_names_by_id.keys()
     route_stops_by_id: dict[str, int] = {}
     for route_id in route_ids:
-        num_stops = get_num_stops_on_route(route_id)
-        route_stops_by_id[route_id] = num_stops
+        stops_on_route = get_stops_on_route(route_id)
+        route_stops_by_id[route_id] = len(stops_on_route)
 
     # Sort the data
     sorted_route_stops_by_id = dict(

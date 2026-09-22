@@ -42,8 +42,8 @@ def test_stops_with_flag_succeeds(mocker) -> None:
     }
     mocker.patch("cli.get_route_ids_to_long_names", return_value=mock_route_data)
 
-    mock_stop_data = 23
-    mocker.patch("cli.get_num_stops_on_route", return_value=mock_stop_data)
+    mock_stop_data = range(23)
+    mocker.patch("cli.get_stops_on_route", return_value=mock_stop_data)
 
     runner = CliRunner()
 
