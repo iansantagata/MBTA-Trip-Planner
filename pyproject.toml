@@ -15,6 +15,7 @@ license = "MIT"
 dependencies = [
     "click==8.5.0",
     "requests==2.34.2",
+    "tabulate==0.10.0",
 ]
 
 [project.optional-dependencies]
@@ -25,10 +26,12 @@ dev = [
     "pylint==4.0.8",
     "pytest==9.1.1",
     "pytest-mock==3.15.1",
+    "types-tabulate==0.10.0.20260508"
 ]
 
 [project.scripts]
 routes = "cli:routes"
+stops = "cli:stops"
 
 [tool.pylint]
 main.ignore = [ "CVS", ".venv", "tests" ]

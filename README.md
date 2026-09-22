@@ -39,7 +39,7 @@ rm -rf .venv/
 
 Ensure that local development dependencies have been installed in the quick start guide (above) before continuing.
 
-To format, lint, and type check code in this repository, run any of the following commands at repository root:
+To perform local development checks in this repository, run any of the following commands at repository root:
 
 ```bash
 # Sort imports
@@ -53,6 +53,15 @@ pylint .
 
 # Static type check
 mypy .
+
+# Run tests
+pytest
 ```
 
-To test code in this repository, run `pytest` at repository root.
+## Solutions
+
+See relevant documentation files for each solution:
+
+- [Question 1 - Route Names](docs/question_1.md)
+- [Question 2 - Route Stops](docs/question_2.md)
+- [Question 3 - Route Planning](docs/question_3.md)

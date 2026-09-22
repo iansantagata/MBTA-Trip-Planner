@@ -25,8 +25,7 @@ Please document your decision and your reasons for it.
 - Allow the solution to extend to all supported types of routes as requested by the user to be more generalizable
     - Includes light rail, heavy rail, commuter rail, bus, and ferry route types
 - Prefer re-requesting to use latest data set rather than downloading and storing a local copy that can become stale
-- Deduplicate and sort output shown to user in the presentation layer
-- Avoid sorting intermediate data which is extra work
+- Deduplicate and sort data shown to user in the presentation layer
 - Separate interacting with the API from interacting with the CLI to keep responsibilities separate
 - Added basic tests with mocking of the API request so that tests do not trigger API requests
 

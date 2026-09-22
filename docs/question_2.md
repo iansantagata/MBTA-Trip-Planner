@@ -10,9 +10,16 @@ Extend your pgoram so it displays additional information:
 
 ## Decisions & Considerations
 
+- Continue with the same considerations in the previous questions (unless otherwise noted)
 - Leverage what has already been built and continue supporting all previous use cases still applicable
 - Separate into a different command to make it transparent for users what each command does and what applies for their use case
-- Keep duplication to a minimum by not repeating code (i.e. DRY)
+- Keep duplication to a minimum by not repeating code (i.e. DRY) and reusing code when possible
+- Add additional tests with more targeted mocking of functions not under test or API requests
+- Chose to display all routes with their stop counts at once rather than only selecting highest or lowest stop routes for a more generalizable and usable result
+- Opt to interpret route ID not found by API request as 0 stops for user transparency purposes
+    - This would only occur if a route ID is provided but unrecognized, leading to an HTTP 200 Success with no stop data
+    - Functionally, this is only possible in testing scenarios, or when a route ID is manually provided (which is not currently supported)
+- Separate commands for listing routes with stop count from listing stops that connect multiple routes since they have different use cases
 
 ## Solution
 
@@ -20,11 +27,11 @@ At the top level of this repository, run any of the following commands in a shel
 
 ```bash
 # Help command for CLI
+stops --help
 
+# Short flag version of stop count solution
+stops -lh
 
-# Short flag version of solution
-
-
-# Long flag version of solution
-
+# Long flag version of stop count solution
+stops --light-rail --heavy-rail
 ```
