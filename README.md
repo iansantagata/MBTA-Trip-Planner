@@ -45,7 +45,7 @@ rm -rf .venv/
 
 ## Local Development
 
-Ensure that local development dependencies have been installed in the quick start guide (above) before continuing.
+Ensure that local development dependencies have been installed in the [Quick Start](README.md#quick-start) section above before continuing.
 
 To perform local development checks in this repository, run any of the following commands at repository root:
 
