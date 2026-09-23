@@ -19,6 +19,7 @@ How you handle input, represent train routes, and present output is your choice.
 - Utilize arguments for required CLI parameters rather than options or flags for this new travel plan type command
 - Allow for any capitalization on inputs, but require they are spelled the same as existing stops
     - On failure to map to an existing stop, output the list of valid stop names to prompt corrective usage
+- Allow for arguments with spaces, but need to be captured with double quotes (ideally not escaped with slashes)
 - Utilize a breadth-first search style approach to be able to return a route as soon as it is found
     - The API does not make apparent the adjacency of stations on the same route
     - This hinders the ability to do true breadth-first search and guarantee the shortest path is used
@@ -30,7 +31,7 @@ How you handle input, represent train routes, and present output is your choice.
 
 ## Solution
 
-At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md]):
+At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md](README.md)):
 
 ```bash
 # Help commands for CLI

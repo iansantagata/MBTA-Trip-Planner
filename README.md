@@ -2,7 +2,15 @@
 
 This project is an example project which utilizes the Massachusetts Bay Transit Authority's (MBTA's) API to answer questions about train transit around the Boston area.
 
-See [docs/] for more description on each question addressed by this application.
+## Solutions
+
+See the [docs](docs/) folder for more description on each question addressed by this application.
+
+Each solution has an accompanying documentation file:
+
+- [Question 1 - Route Names](docs/question_1.md)
+- [Question 2 - Route Stops](docs/question_2.md)
+- [Question 3 - Route Planning](docs/question_3.md)
 
 ## Quick Start
 
@@ -57,11 +65,3 @@ mypy .
 # Run tests
 pytest
 ```
-
-## Solutions
-
-See relevant documentation files for each solution:
-
-- [Question 1 - Route Names](docs/question_1.md)
-- [Question 2 - Route Stops](docs/question_2.md)
-- [Question 3 - Route Planning](docs/question_3.md)

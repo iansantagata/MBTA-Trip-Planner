@@ -31,7 +31,7 @@ Please document your decision and your reasons for it.
 
 ## Solution
 
-At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md]):
+At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md](README.md)):
 
 ```bash
 # Help command for CLI

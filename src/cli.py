@@ -172,6 +172,7 @@ def _get_path_route_guidance(
     return path_route_guidance
 
 
+# CLI Commands
 @click.command()
 @_light_rail_option
 @_heavy_rail_option
@@ -191,6 +192,11 @@ def routes(
     List is ordered alphabetically by route name.
 
     At least one route type flag is required.
+
+    Example Usages: \n
+      $ routes --help \n
+      $ routes --light-rail \n
+      $ routes -lh \n
     """
 
     # Validate inputs
@@ -244,6 +250,11 @@ def stops(
     by route name.
 
     At least one route type flag is required.
+
+    Example Usages: \n
+      $ stops --help \n
+      $ stops --light-rail \n
+      $ stops -lh \n
     """
 
     # Validate inputs
@@ -312,6 +323,11 @@ def connections(
     order alphabetically.
 
     At least one route type flag is required.
+
+    Example Usages: \n
+      $ connections --help \n
+      $ connections --light-rail \n
+      $ connections -lh \n
     """
 
     # Validate inputs
@@ -375,13 +391,19 @@ def connections(
     "start",
     required=True,
     type=str,
-    help="The origin station at the start of the intended travel path",
+    help=(
+        "The origin station at the start of the intended travel path. "
+        'Should be quoted if there is a space in the name (e.g. "North Station")'
+    ),
 )
 @click.argument(
     "end",
     required=True,
     type=str,
-    help="The destination station at the end of the intended travel path",
+    help=(
+        "The destination station at the end of the intended travel path."
+        'Should be quoted if there is a space in the name (e.g. "North Station")'
+    ),
 )
 @_light_rail_option
 @_heavy_rail_option
@@ -404,6 +426,11 @@ def travel(
     Table is ordered chronologically by step with user-friendly instructions.
 
     At least one route type flag is required.
+
+    Example Usages: \n
+      $ travel --help \n
+      $ travel --light-rail "Park Street" "North Station" \n
+      $ travel -lh Arlington Ashmont \n
     """
 
     # Validate inputs
