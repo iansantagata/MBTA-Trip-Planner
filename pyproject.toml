@@ -33,6 +33,7 @@ dev = [
 routes = "cli:routes"
 stops = "cli:stops"
 connections = "cli:connections"
+travel = "cli:travel"
 
 [tool.pylint]
 main.ignore = [ "CVS", ".venv", "tests" ]

@@ -2,7 +2,7 @@
 
 ## Prompt
 
-Extend your pgoram so it displays additional information:
+Extend your program so it displays additional information:
 
 1. The name of the subway route with the most stops and the count of its stops
 2. The name of the subway route with the fewest stops and the count of its stops
@@ -20,6 +20,7 @@ Extend your pgoram so it displays additional information:
     - This would only occur if a route ID is provided but unrecognized, leading to an HTTP 200 Success with no stop data
     - Functionally, this is only possible in testing scenarios, or when a route ID is manually provided (which is not currently supported)
 - Separate commands for enumerating routes with stop counts from enumerating connecting stops since they have different use cases
+- More prone to rate limiting from MBTA API since more requests are being made (i.e. 1 `/routes` request and N `/stops` requests - 1 for each route)
 
 ## Solution
 
