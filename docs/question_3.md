@@ -31,7 +31,7 @@ How you handle input, represent train routes, and present output is your choice.
 
 ## Solution
 
-At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md](README.md)):
+At the top level of this repository, run any of the following commands in a shell after setting up the repository locally (see [README.md](../README.md)):
 
 ```bash
 # Help commands for CLI
